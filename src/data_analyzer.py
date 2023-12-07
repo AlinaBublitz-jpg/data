@@ -89,15 +89,11 @@ class DataAnalyzer(DataHandler):
         x = datapoint[0]
         y = datapoint[1]
 
-        # Set the deviation to infinity so that the first deviation will always be lower
-        rv_deviation = float('inf')
-        rv_ideal_func = None
 
-        # How do we get training_deviation?
-        training_deviation = 100
+        rv_suitable_array = []
 
         # Criteria for deviation
-        max_deviation = math.sqrt(2) * training_deviation
+        max_deviation = math.sqrt(2)
 
         ideal = self.ideal_set
         best_fits = self.best_fits
@@ -109,13 +105,14 @@ class DataAnalyzer(DataHandler):
             # Compute the deviation
             deviation = abs(y - ideal_y)
             # If the deviation is lower or equal than the max deviation, set the ideal function and update the deviation
-            if deviation <= max_deviation and deviation < rv_deviation:
-                rv_deviation = deviation
-                rv_ideal_func = best_fit
-            
-        if (rv_ideal_func is None):
+            if deviation <= max_deviation:
+                rv_suitable_array.append([x, y, deviation, best_fit])
+
+
+        if len(rv_suitable_array) == 0:
             return None
-        return x, y, rv_deviation, rv_ideal_func
+
+        return rv_suitable_array
         
         
     
@@ -129,6 +126,8 @@ class DataAnalyzer(DataHandler):
         # Initialize empty list to store results
         results = []
 
+        no_best_fit = []
+
         # Read the CSV file in chunks
         chunks = pd.read_csv(csv_path, chunksize=1)
 
@@ -141,9 +140,12 @@ class DataAnalyzer(DataHandler):
             # Call the function
             result = self.test_data_point(datapoint)
             if result is None:
-                print('No best fit found for datapoint ' + str(datapoint))
+                no_best_fit.append([x, y, None, None])
             else:
-                results.append(result)
-        df = pd.DataFrame(results, columns=['x', 'y', 'delta_y', 'Ideal_Func'])
+                results.extend(result)
+
+        print('No best fit: ', len(no_best_fit))    
+
+        df = pd.DataFrame(results, columns=['x', 'y', 'delta_y', 'ideal_func'])
         return df
     

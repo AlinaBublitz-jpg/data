@@ -34,9 +34,9 @@ class DataHandler:
     def get_data_from_db(self, query: str):
         return pd.read_sql_query(query, self.engine)
     
-    def append_data_to_table(self, table_name: str, data: pd.DataFrame):
-        data.to_sql(table_name, self.engine, if_exists='append', index=False)
-
+    def replace_data_to_table(self, table_name: str, data: pd.DataFrame):
+        data.to_sql(table_name, self.engine, if_exists='replace', index=False)
+            
     # Returns an array of curves from a pandas DataFrame
     def get_curves_from_frame(self, frame: pd.DataFrame):
         # Convert DataFrame to numpy array

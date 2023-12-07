@@ -5,6 +5,7 @@ from sqlalchemy import Float, Text
 table_training = {'x': Float}
 table_training.update({f'y{i}': Float for i in range(1, 5)})
 
+
 # Define test table
 table_test = {
     'x': Float,

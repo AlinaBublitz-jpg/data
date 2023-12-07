@@ -5,6 +5,7 @@ from data_analyzer import DataAnalyzer
 from data_handler import DataHandler
 from schema.index import table_test, table_training, table_ideal
 
+
 # Initialize data handler
 db_handler = DataHandler()
 
@@ -37,8 +38,13 @@ best_fits = db_analyzer.find_ideal_curves()
 # print(best_fits)
 
 test_results = db_analyzer.test_data_set('data/test.csv')
-print(test_results)
+# print(test_results)
 
 # Write test_results to database
-# db_analyzer.append_data_to_table('test', test_results)
+db_analyzer.replace_data_to_table('test', test_results)
+
+
+# Get data from tables
+test = db_handler.get_data_from_db('SELECT * FROM test')
+print(test)
 
