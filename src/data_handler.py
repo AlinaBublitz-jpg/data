@@ -36,6 +36,7 @@ class DataHandler:
     
     def replace_data_to_table(self, table_name: str, data: pd.DataFrame):
         data.to_sql(table_name, self.engine, if_exists='replace', index=False)
+        print(self.get_data_from_db('SELECT * from test'))
             
     # Returns an array of curves from a pandas DataFrame
     def get_curves_from_frame(self, frame: pd.DataFrame):

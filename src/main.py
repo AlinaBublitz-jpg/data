@@ -46,5 +46,5 @@ db_analyzer.replace_data_to_table('test', test_results)
 
 # Get data from tables
 test = db_handler.get_data_from_db('SELECT * FROM test')
-print(test)
+
 
