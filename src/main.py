@@ -27,7 +27,7 @@ train = db_handler.get_data_from_db('SELECT * FROM train')
 ideal = db_handler.get_data_from_db('SELECT * FROM ideal')
 
 # Initialize data analyzer
-db_analyzer = DataAnalyzer(db_handler)
+db_analyzer = DataAnalyzer()
 
 # Load data to data analyzer
 db_analyzer.load_training_data(train)
@@ -46,5 +46,7 @@ db_analyzer.replace_data_to_table('test', test_results)
 
 # Get data from tables
 test = db_handler.get_data_from_db('SELECT * FROM test')
+print(test)
+
 
 
