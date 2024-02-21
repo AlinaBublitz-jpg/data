@@ -41,38 +41,38 @@ the data set of 50 ideal functions (C). The following criteria should be observe
 
 **1.2 Details database and tables**
 
-- You will receive four training data sets in the form of CSV files. Your Python program must be able to
-  to independently compile an SQLite database (file), ideally via sqlalchemy, and load the training data
-  into a single, five-column table. The first column shows the x-values of all
+-   You will receive four training data sets in the form of CSV files. Your Python program must be able to
+    to independently compile an SQLite database (file), ideally via sqlalchemy, and load the training data
+    into a single, five-column table. The first column shows the x-values of all
 
 ```
 Functions. Table 1 at the end of this subsection shows you what structure your table will probably
 have.
 ```
 
-- The fifty ideal functions, which are also provided via a CSV file, must be loaded into another table.
-  Similarly, the first column shows the x-values, which means that there are 51 columns in total. Table
-  2 at the end of this subsection describes schematically which structure is expected.
-- After the training data and the ideal functions have been loaded into the database, the test data (B)
-  must be loaded line by line from another CSV file and - if it fulfills the criterion in subsection 2 - saved
-  with one of the four matched functions.
-- The results must then be stored in another four-column table in the SQLite database. According to
-  Table 3 at the end of this subsection, this table contains four columns with x and y values as well as
-  the correspondingly selected ideal function and the associated deviation.
-- Finally, the training data, the test data, the selected ideal functions and the corresponding assigned data sets are visualized under an appropriately selected representation of the deviation.
+-   The fifty ideal functions, which are also provided via a CSV file, must be loaded into another table.
+    Similarly, the first column shows the x-values, which means that there are 51 columns in total. Table
+    2 at the end of this subsection describes schematically which structure is expected.
+-   After the training data and the ideal functions have been loaded into the database, the test data (B)
+    must be loaded line by line from another CSV file and - if it fulfills the criterion in subsection 2 - saved
+    with one of the four matched functions.
+-   The results must then be stored in another four-column table in the SQLite database. According to
+    Table 3 at the end of this subsection, this table contains four columns with x and y values as well as
+    the correspondingly selected ideal function and the associated deviation.
+-   Finally, the training data, the test data, the selected ideal functions and the corresponding assigned data sets are visualized under an appropriately selected representation of the deviation.
 
 **1.3 Structure of the Python program**
 
-- The program should be object-oriented as far as possible.
-- It should have at least one inheritance hierarchy.
-- Use both standard and user-defined exception handling.
-- You should use Pandas for the program logic, but also visualization using Bokeh, matlibplot, etc.
-- Write unit tests wherever possible.
-- Document your program completely and make use of docstrings.
+-   The program should be object-oriented as far as possible.
+-   It should have at least one inheritance hierarchy.
+-   Use both standard and user-defined exception handling.
+-   You should use Pandas for the program logic, but also visualization using Bokeh, matlibplot, etc.
+-   Write unit tests wherever possible.
+-   Document your program completely and make use of docstrings.
 
 **Use of Git**
 
-- Please use Git for version control of your code.
+-   Please use Git for version control of your code.
 
 **Table 1: Training data database table**
 
@@ -129,23 +129,3 @@ hand and for formal and general questions about academic work on the other. Howe
 to approve outlines, parts of texts or drafts, as the independent preparation is part of the examination work to be
 performed and is included in the overall assessment. However, tips on draft outlines are provided to make it easier
 t o start structuring an academic paper.
-
-## PLAN
-
-1. Import necessary libraries (pandas, numpy, matplotlib, sqlalchemy, etc.)
-2. Define a class DataHandler to handle all data-related tasks:
-   1. Define a method load_csv_to_db to load CSV files into SQLite database using sqlalchemy.
-   2. Define a method get_data_from_db to retrieve data from the SQLite database.
-3. Define a class DataAnalyzer that inherits from DataHandler to handle data analysis tasks:
-   1. Define a method find_best_fit to find the best fit from the dataset of 50 ideal functions.
-   2. Define a method validate_selection to validate the selection using the test dataset.
-   3. Define a method save_deviation to save the corresponding deviations for each test dataset.
-4. Define a class DataVisualizer to handle data visualization tasks:
-   1. Define a method visualize_data to visualize all data logically.
-5. Define a class UnitTest to handle unit testing:
-   1. Define various methods to test each functionality of the program.
-6. In the main function:
-   1. Create an instance of DataHandler and load all CSV files into the SQLite database.
-   2. Create an instance of DataAnalyzer and perform data analysis tasks.
-   3. Create an instance of DataVisualizer and visualize all data.
-   4. Create an instance of UnitTest and perform unit testing.
