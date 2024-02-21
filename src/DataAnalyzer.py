@@ -8,6 +8,23 @@ from MSECalculator import MSECalculator
 
 
 class DataAnalyzer(DataHandler):
+    """
+    A class that analyzes data and finds the best fit curves.
+
+    Attributes:
+        train_set (pd.DataFrame): The training dataset.
+        ideal_set (pd.DataFrame): The ideal dataset.
+        best_fits (List[str]): The list of best fit curves.
+
+    Methods:
+        load_training_data(data): Loads the training data.
+        load_ideal_data(data): Loads the ideal data.
+        find_best_fit(train_y): Finds the best fit curve for a given training set.
+        find_ideal_curves(): Finds the ideal curves for the training set.
+        test_data_point(datapoint): Tests a single data point against the ideal curves.
+        test_data_set(csv_path): Tests a dataset against the ideal curves.
+    """
+
     def __init__(self, *args, **kwargs):
         # Call parent constructor
         super().__init__(*args, **kwargs)
@@ -16,20 +33,40 @@ class DataAnalyzer(DataHandler):
         self.best_fits: List[str] = None
 
     def load_training_data(self, data):
+        """
+        Loads the training data.
+
+        Args:
+            data: The training data.
+
+        Returns:
+            None
+        """
         self.train_set = data
     
     def load_ideal_data(self, data):
-        self.ideal_set = data
+        """
+        Loads the ideal data.
 
-    def mean_squared_error(self, y_true: list, y_pred: list) -> float | None:
-        if len(y_true) != len(y_pred):
-            return
-        squared_diff = [(a - b) ** 2 for a, b in zip(y_true, y_pred)]
-        mse = sum(squared_diff) / len(squared_diff)
-        return mse
+        Args:
+            data: The ideal data.
+
+        Returns:
+            None
+        """
+        self.ideal_set = data
 
 
     def find_best_fit(self, train_y: List):
+        """
+        Finds the best fit curve for a given training set.
+
+        Args:
+            train_y (List): The y values of the training set.
+
+        Returns:
+            Tuple: The name of the best fit curve and the lowest mean squared error (MSE).
+        """
         if self.ideal_set is None:
             print('Load ideal set first')
             return
@@ -59,6 +96,12 @@ class DataAnalyzer(DataHandler):
         return name, lowest_mse    
     
     def find_ideal_curves(self):
+        """
+        Finds the ideal curves for the training set.
+
+        Returns:
+            List[str]: The list of best fit curves.
+        """
         if self.train_set is None:
             print('Load training set first')
             return
@@ -79,6 +122,15 @@ class DataAnalyzer(DataHandler):
         return best_fits
     
     def test_data_point(self, datapoint: List):
+        """
+        Tests a single data point against the ideal curves.
+
+        Args:
+            datapoint (List): The data point to be tested.
+
+        Returns:
+            List[List]: A list of suitable data points that meet the deviation criteria.
+        """
         if self.best_fits is None:
             print('Find best fits first')
             return
@@ -118,6 +170,15 @@ class DataAnalyzer(DataHandler):
         
     
     def test_data_set(self, csv_path: str):
+        """
+        Tests a dataset against the ideal curves.
+
+        Args:
+            csv_path (str): The path to the CSV file containing the dataset.
+
+        Returns:
+            pd.DataFrame: The results of the test, including x, y, deviation, and ideal function.
+        """
         if self.best_fits is None:
             print('Find best fits first')
             return
@@ -149,4 +210,3 @@ class DataAnalyzer(DataHandler):
 
         df = pd.DataFrame(results, columns=['x', 'y', 'delta_y', 'ideal_func'])
         return df
-    
