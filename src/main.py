@@ -1,19 +1,20 @@
-from matplotlib import pyplot as plt
-import numpy as np
-import pandas as pd
-from data_analyzer import DataAnalyzer
-from data_handler import DataHandler
+from DatabaseConnection import DatabaseConnection
+from DataAnalyzer import DataAnalyzer
+from DataHandler import DataHandler
 from schema.index import table_test, table_training, table_ideal
 
 
+# Initialize database connection
+db_connection = DatabaseConnection()
+
 # Initialize data handler
-db_handler = DataHandler()
+db_handler = DataHandler(db_connection)
 
 
 # Create tables
-db_handler.create_table('test', table_test)
-db_handler.create_table('train', table_training)
-db_handler.create_table('ideal', table_ideal)
+db_handler.create_table('test', table_test, True)
+db_handler.create_table('train', table_training, True)
+db_handler.create_table('ideal', table_ideal, True)
 
 
 # Load data to tables
@@ -27,7 +28,7 @@ train = db_handler.get_data_from_db('SELECT * FROM train')
 ideal = db_handler.get_data_from_db('SELECT * FROM ideal')
 
 # Initialize data analyzer
-db_analyzer = DataAnalyzer()
+db_analyzer = DataAnalyzer(db_connection)
 
 # Load data to data analyzer
 db_analyzer.load_training_data(train)
@@ -41,7 +42,7 @@ test_results = db_analyzer.test_data_set('data/test.csv')
 # print(test_results)
 
 # Write test_results to database
-db_analyzer.replace_data_to_table('test', test_results)
+db_analyzer.replace_data_in_table('test', test_results)
 
 
 # Get data from tables

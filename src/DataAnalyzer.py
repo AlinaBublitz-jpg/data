@@ -3,7 +3,8 @@ from typing import Dict, List, Union
 import numpy as np
 import pandas as pd
 
-from data_handler import DataHandler
+from DataHandler import DataHandler
+from MSECalculator import MSECalculator
 
 
 class DataAnalyzer(DataHandler):
@@ -45,7 +46,7 @@ class DataAnalyzer(DataHandler):
             y_values =  self.ideal_set[f'y{i}'].tolist()
           
             # Compute the MSE between the y values of the curve and the training set
-            mse = self.mean_squared_error(train_y, y_values)
+            mse = MSECalculator.calculate(train_y, y_values)
 
             # If the MSE is lower than the current lowest MSE, update the lowest MSE and best curve
             if mse < lowest_mse:

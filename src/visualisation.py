@@ -1,7 +1,11 @@
 import matplotlib.pyplot as plt
-from data_handler import DataHandler
+from DataHandler import DataHandler
+from DatabaseConnection import DatabaseConnection
 from schema.index import table_training
-from data_analyzer import DataAnalyzer
+from DataAnalyzer import DataAnalyzer
+
+# Create an instance of the DatabaseConnection class for managing database connections
+db_connection = DatabaseConnection()
 
 # Create an instance of the DataHandler class for managing data operations
 db_handler = DataHandler()
