@@ -2,8 +2,8 @@ import unittest
 import numpy as np
 import pandas as pd
 import os
-from data_analyzer import DataAnalyzer
-from data_handler import DataHandler
+from DataAnalyzer import DataAnalyzer
+from DataHandler import DataHandler
 from sqlalchemy import Column, MetaData, Table, create_engine
 from sqlalchemy import Float, String
 
