@@ -3,8 +3,8 @@ from typing import Dict, List, Union
 import numpy as np
 import pandas as pd
 
-from DataHandler import DataHandler
-from MSECalculator import MSECalculator
+from modules.DataHandler import DataHandler
+from modules.MSECalculator import MSECalculator
 
 
 class DataAnalyzer(DataHandler):

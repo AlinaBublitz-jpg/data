@@ -4,9 +4,10 @@ It creates tables, loads data from CSV files into the tables, analyzes the data,
 finds the best fits, tests the data set, and writes the test results to the database.
 """
 
-from DatabaseConnection import DatabaseConnection
-from DataAnalyzer import DataAnalyzer
-from DataHandler import DataHandler
+
+from modules.DataAnalyzer import DataAnalyzer
+from modules.DataHandler import DataHandler
+from modules.DatabaseConnection import DatabaseConnection
 from schema.index import table_test, table_training, table_ideal
 
 # Initialize database connection

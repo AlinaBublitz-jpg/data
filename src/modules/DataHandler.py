@@ -1,8 +1,9 @@
 from typing import Dict, Any, List, TypedDict
-from DatabaseConnection import DatabaseConnection
 import pandas as pd
 from sqlalchemy import inspect, Column, MetaData, Table,  exc
 import os
+
+from modules.DatabaseConnection import DatabaseConnection
 
 class ColumnDefinition(TypedDict):
     name: str
