@@ -8,13 +8,13 @@ from DataAnalyzer import DataAnalyzer
 db_connection = DatabaseConnection()
 
 # Create an instance of the DataHandler class for managing data operations
-db_handler = DataHandler()
+db_handler = DataHandler(db_connection)
 
 # Example: Load training data from the database based on the specified table name
 train_data = db_handler.get_data_from_db(f'SELECT * FROM {table_training}')
 
 # Create an instance of the DataAnalyzer class, which extends DataHandler
-data_analyzer = DataAnalyzer()
+data_analyzer = DataAnalyzer(db_connection)
 
 # Example: Load ideal set data from the database
 ideal_set_data = db_handler.get_data_from_db('SELECT * FROM ideal')
